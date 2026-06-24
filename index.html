@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UDS Debate & Civic Education Society</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .hero-left {
+      background: var(--green-deep);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 5%;
+      position: relative;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      top: 0; right: -1px; bottom: 0;
+      width: 60px;
+      background: var(--green-deep);
+      clip-path: polygon(0 0, 0% 100%, 100% 100%);
+      z-index: 2;
+    }
+    .hero-quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem;
+      line-height: 0.6;
+      color: var(--gold);
+      opacity: 0.35;
+      margin-bottom: 1.5rem;
+      user-select: none;
+    }
+    .hero-left h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      color: var(--white);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      max-width: 480px;
+    }
+    .hero-left h1 em {
+      font-style: normal;
+      color: var(--gold-light);
+    }
+    .hero-left p {
+      color: rgba(255,255,255,0.72);
+      font-size: 1rem;
+      max-width: 400px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-stats {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      gap: 2.5rem;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.3rem;
+    }
+    .hero-right {
+      background: #0e3a1a;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* decorative podium silhouette pattern */
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 30% 70%, rgba(201,152,10,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(46,139,68,0.15) 0%, transparent 50%);
+    }
+    .hero-logo-wrap {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
+    .hero-logo-wrap img {
+      width: clamp(180px, 28vw, 320px);
+      border-radius: 50%;
+      border: 5px solid var(--gold);
+      box-shadow: 0 0 60px rgba(201,152,10,0.3), 0 0 120px rgba(201,152,10,0.12);
+    }
+    .hero-logo-tagline {
+      margin-top: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+    }
+    /* decorative rings */
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(201,152,10,0.15);
+    }
+    .ring-1 { width: 450px; height: 450px; }
+    .ring-2 { width: 600px; height: 600px; border-color: rgba(201,152,10,0.08); }
+    .ring-3 { width: 750px; height: 750px; border-color: rgba(201,152,10,0.05); }
+
+    /* ── MARQUEE BAND ── */
+    .marquee-band {
+      background: var(--gold);
+      overflow: hidden;
+      padding: 0.7rem 0;
+    }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite;
+      gap: 3rem;
+    }
+    .marquee-track span {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .marquee-dot {
+      color: var(--green-deep);
+      opacity: 0.5;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--green-deep);
+      margin-bottom: 1.25rem;
+    }
+    .about-text p {
+      color: var(--ink-soft);
+      font-size: 0.97rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about-text .btn { margin-top: 1rem; }
+    .about-visual {
+      background: var(--green-deep);
+      border-radius: 8px;
+      padding: 2.5rem;
+      color: var(--white);
+    }
+    .pillar {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .pillar:last-child { border-bottom: none; }
+    .pillar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--gold-light);
+      margin-bottom: 0.35rem;
+    }
+    .pillar p { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+
+    /* ── UPCOMING EVENTS PREVIEW ── */
+    .events-section { background: var(--cream); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .event-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 14px rgba(0,0,0,0.07); transition: transform 0.22s, box-shadow 0.22s; }
+    .event-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(26,92,42,0.13); }
+    .event-card-top {
+      background: var(--green-deep);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .event-date-badge {
+      background: var(--gold);
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      text-align: center;
+      min-width: 56px;
+    }
+    .event-date-badge .day {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .event-date-badge .month {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .event-card-top-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.25;
+    }
+    .event-card-top-text .event-type {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-top: 0.2rem;
+    }
+    .event-card-body { padding: 1.25rem 1.5rem; }
+    .event-card-body p { font-size: 0.85rem; color: var(--ink-muted); line-height: 1.65; }
+    .event-card-body .event-meta {
+      margin-top: 0.85rem;
+      font-size: 0.78rem;
+      color: var(--green-deep);
+      font-weight: 500;
+    }
+    .events-cta { text-align: center; }
+
+    /* ── MEETING SCHEDULE ── */
+    .schedule-section { background: var(--green-deep); }
+    .schedule-inner { max-width: 1200px; margin: 0 auto; }
+    .schedule-header { text-align: center; margin-bottom: 3rem; }
+    .schedule-header h2 { color: var(--white); font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 0.75rem; }
+    .schedule-header p { color: rgba(255,255,255,0.65); }
+    .schedule-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 720px; margin: 0 auto; }
+    .schedule-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 2rem 2.25rem;
+      text-align: center;
+      border-top: 3px solid var(--gold);
+    }
+    .schedule-day {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--gold-light);
+      margin-bottom: 0.4rem;
+    }
+    .schedule-time {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .schedule-note { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+    /* ── JOIN CTA ── */
+    .join-section { background: var(--cream); text-align: center; padding: 6rem 2rem; }
+    .join-inner { max-width: 640px; margin: 0 auto; }
+    .join-inner h2 { font-size: clamp(2rem, 4.5vw, 3rem); color: var(--green-deep); margin-bottom: 1rem; }
+    .join-inner p { color: var(--ink-muted); font-size: 1rem; margin-bottom: 2rem; line-height: 1.75; }
+    .join-cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.revealed { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { min-height: 360px; }
+      .hero-left { padding: 4rem 1.5rem 3rem; }
+      .hero-left::after { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .events-grid { grid-template-columns: 1fr; }
+      .schedule-cards { grid-template-columns: 1fr; max-width: 360px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="club-logo.jpeg" alt="UDS Debate Society Logo" />
+        <div class="nav-brand-text">
+          <span class="name">UDS Debate Society</span>
+          <span class="tagline">Debate for Development</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="pages/events.html">Events</a></li>
+        <li><a href="pages/members.html">Members</a></li>
+        <li class="nav-cta"><a href="pages/contact.html">Join Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-quote-mark">"</div>
+      <h1>Where <em>Words</em> Shape the Future of Ghana</h1>
+      <p>The UDS Debate and Civic Education Society trains student leaders to think critically, argue persuasively, and serve their communities with knowledge and integrity.</p>
+      <div class="hero-cta">
+        <a href="pages/about.html" class="btn btn-gold">Discover Our Story</a>
+        <a href="pages/contact.html" class="btn btn-outline">Join the Society</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years Active</div>
+        </div>
+        <div>
+          <div class="stat-num">200+</div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div>
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Competitions</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="hero-logo-wrap">
+        <img src="club-logo.jpeg" alt="UDS Debate and Civic Education Society" />
+        <div class="hero-logo-tagline">"Knowledge for Service"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE BAND -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span>Debate for Development</span>
+      <span class="marquee-dot">◆</span>
+      <span>Knowledge for Service</span>
+      <span class="marquee-dot">◆</span>
+      <span>University for Development Studies</span>
+      <span class="marquee-dot">◆</span>
+      <span>Civic Education</span>
+      <span class="marquee-dot">◆</span>
+      <span>Critical Thinking</span>
+      <span class="marquee-dot">◆</span>
+      <span>Leadership Development</span>
+      <span class="marquee-dot">◆</span>
+      <span>Tamale, Ghana</span>
+      <span class="marquee-dot">◆</span>
+      <!-- Repeat for infinite effect -->
+      <span>Debate for Development</span>
+      <span class="marquee-dot">◆</span>
+      <span>Knowledge for Service</span>
+      <span class="marquee-dot">◆</span>
+      <span>University for Development Studies</span>
+      <span class="marquee-dot">◆</span>
+      <span>Civic Education</span>
+      <span class="marquee-dot">◆</span>
+      <span>Critical Thinking</span>
+      <span class="marquee-dot">◆</span>
+      <span>Leadership Development</span>
+      <span class="marquee-dot">◆</span>
+      <span>Tamale, Ghana</span>
+      <span class="marquee-dot">◆</span>
+    </div>
+  </div>
+
+  <!-- ABOUT STRIP -->
+  <section class="section about-strip">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p class="eyebrow">Who We Are</p>
+          <h2>Nurturing Ghana's Next Generation of Civic Leaders</h2>
+          <p>The UDS Debate and Civic Education Society is a student-led organisation at the University for Development Studies, Tamale. We are committed to developing articulate, informed, and engaged citizens through structured debate, civic education, and community outreach.</p>
+          <p>Our members come from diverse faculties across UDS, united by a shared passion for public discourse and service to society.</p>
+          <a href="pages/about.html" class="btn btn-green">Learn More About Us</a>
+        </div>
+        <div class="about-visual reveal">
+          <div class="pillar">
+            <div class="pillar-title">🎤 Public Speaking & Debate</div>
+            <p>We train members in formal debate formats, rhetoric, and public speaking — skills that serve them for life.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">🏛️ Civic Education</div>
+            <p>We educate communities on democracy, governance, and citizens' rights, from campus to the wider Northern Region.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">🏆 Competitions</div>
+            <p>We represent UDS in inter-university debate competitions across Ghana and internationally.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING EVENTS -->
+  <section class="section events-section">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <p class="eyebrow">What's Coming</p>
+        <h2>Upcoming Events</h2>
+        <p>Join us for debates, workshops, and civic programmes throughout the semester.</p>
+      </div>
+      <div class="events-grid">
+        <div class="event-card reveal">
+          <div class="event-card-top">
+            <div class="event-date-badge">
+              <div class="day">05</div>
+              <div class="month">Jul</div>
+            </div>
+            <div class="event-card-top-text">
+              <h3>Inter-Faculty Debate Championship</h3>
+              <div class="event-type">Competition</div>
+            </div>
+          </div>
+          <div class="event-card-body">
+            <p>Faculties across UDS compete in this annual flagship debate tournament. Open to all students as spectators.</p>
+            <div class="event-meta">📍 UDS Main Auditorium &nbsp;·&nbsp; 10:00 AM</div>
+          </div>
+        </div>
+        <div class="event-card reveal">
+          <div class="event-card-top">
+            <div class="event-date-badge">
+              <div class="day">12</div>
+              <div class="month">Jul</div>
+            </div>
+            <div class="event-card-top-text">
+              <h3>Civic Education Outreach — Tamale Central</h3>
+              <div class="event-type">Outreach</div>
+            </div>
+          </div>
+          <div class="event-card-body">
+            <p>Members take civic education to the Tamale Central community, covering voter rights and democratic participation.</p>
+            <div class="event-meta">📍 Tamale Central Community Centre &nbsp;·&nbsp; 9:00 AM</div>
+          </div>
+        </div>
+        <div class="event-card reveal">
+          <div class="event-card-top">
+            <div class="event-date-badge">
+              <div class="day">19</div>
+              <div class="month">Jul</div>
+            </div>
+            <div class="event-card-top-text">
+              <h3>Rhetoric & Argumentation Workshop</h3>
+              <div class="event-type">Training</div>
+            </div>
+          </div>
+          <div class="event-card-body">
+            <p>A two-hour skills workshop for new and returning members covering persuasion techniques and rebuttal strategies.</p>
+            <div class="event-meta">📍 UDS Faculty of Law Lecture Hall &nbsp;·&nbsp; 2:00 PM</div>
+          </div>
+        </div>
+      </div>
+      <div class="events-cta reveal">
+        <a href="pages/events.html" class="btn btn-green">View All Events</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEETING SCHEDULE -->
+  <section class="section schedule-section">
+    <div class="schedule-inner">
+      <div class="schedule-header reveal">
+        <p class="eyebrow" style="color: var(--gold-light);">Regular Meetings</p>
+        <h2>We Meet Every Week</h2>
+        <p>Come sharpen your voice. All UDS students are welcome.</p>
+      </div>
+      <div class="schedule-cards">
+        <div class="schedule-card reveal">
+          <div class="schedule-day">Friday</div>
+          <div class="schedule-time">5:00 PM</div>
+          <div class="schedule-note">Weekly practice session</div>
+        </div>
+        <div class="schedule-card reveal">
+          <div class="schedule-day">Saturday</div>
+          <div class="schedule-time">2:00 PM</div>
+          <div class="schedule-note">Extended training & workshops</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN CTA -->
+  <section class="join-section">
+    <div class="join-inner">
+      <p class="eyebrow">Become a Member</p>
+      <h2>Ready to Find Your Voice?</h2>
+      <p>Whether you're a first-year student or a final-year veteran, the UDS Debate and Civic Education Society welcomes you. No prior experience needed — just passion, curiosity, and a willingness to grow.</p>
+      <div class="join-cta-btns">
+        <a href="pages/contact.html" class="btn btn-gold">Join Now</a>
+        <a href="pages/members.html" class="btn btn-green">Meet Our Members</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="club-logo.jpeg" alt="UDS Debate Society" />
+        <p>The UDS Debate and Civic Education Society — building articulate, informed, and civically engaged leaders at the University for Development Studies, Tamale.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/about.html">About Us</a></li>
+          <li><a href="pages/events.html">Events</a></li>
+          <li><a href="pages/members.html">Members</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <ul>
+          <li><a href="mailto:udsdebatesociety@uds.edu.gh">udsdebatesociety@uds.edu.gh</a></li>
+          <li><a href="#">UDS Main Campus, Tamale</a></li>
+          <li><a href="#">Fridays 5:00 PM</a></li>
+          <li><a href="#">Saturdays 2:00 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 UDS Debate & Civic Education Society. All rights reserved.</span>
+      <span class="motto">"Debate for Development"</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & Join — UDS Debate & Civic Education Society</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.revealed { opacity: 1; transform: none; }
+
+    /* CONTACT LAYOUT */
+    .contact-section { background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* Contact info panel */
+    .contact-info-panel {
+      background: var(--green-deep);
+      border-radius: 12px;
+      padding: 2.5rem;
+      color: var(--white);
+      position: sticky;
+      top: 90px;
+    }
+    .contact-info-panel h3 {
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .contact-info-panel > p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .contact-item:last-of-type { border-bottom: none; }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(201,152,10,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(201,152,10,0.3);
+    }
+    .contact-item-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.2rem;
+    }
+    .contact-item-value {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .contact-item-value a {
+      color: inherit;
+    }
+    .social-links {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .social-links h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+    }
+    .social-row { display: flex; gap: 0.75rem; }
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background 0.2s;
+      cursor: pointer;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .social-btn:hover { background: rgba(201,152,10,0.25); }
+
+    /* JOIN FORM */
+    .form-wrap {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 2.5rem;
+    }
+    .form-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--green-deep);
+      margin-bottom: 0.5rem;
+    }
+    .form-section-sub {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      margin-bottom: 2rem;
+      line-height: 1.65;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    input, select, textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      padding: 0.7rem 1rem;
+      transition: border-color 0.2s;
+      outline: none;
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--green-mid);
+    }
+    textarea { resize: vertical; min-height: 110px; }
+    select { appearance: none; cursor: pointer; }
+    .radio-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.25rem; }
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      font-weight: normal;
+      letter-spacing: 0;
+      text-transform: none;
+      cursor: pointer;
+    }
+    .radio-label input[type="radio"] {
+      width: auto;
+      accent-color: var(--green-deep);
+    }
+    .form-submit { text-align: right; margin-top: 0.5rem; }
+    .form-note { font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.75rem; }
+
+    /* Success message */
+    .form-success {
+      display: none;
+      background: rgba(26,92,42,0.08);
+      border: 2px solid var(--green-light);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .form-success.show { display: block; }
+    .form-success h4 { color: var(--green-deep); margin-bottom: 0.4rem; }
+    .form-success p { font-size: 0.88rem; color: var(--ink-muted); }
+
+    /* WHY JOIN */
+    .why-section { background: var(--cream); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .why-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 2rem 1.75rem;
+      border-top: 3px solid var(--gold);
+    }
+    .why-icon { font-size: 1.8rem; margin-bottom: 0.85rem; }
+    .why-card h4 { font-size: 1rem; color: var(--green-deep); margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.84rem; color: var(--ink-muted); line-height: 1.7; }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-info-panel { position: static; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../club-logo.jpeg" alt="UDS Debate Society Logo" />
+        <div class="nav-brand-text">
+          <span class="name">UDS Debate Society</span>
+          <span class="tagline">Debate for Development</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li class="nav-cta"><a href="contact.html">Join Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="eyebrow">Get Involved</p>
+      <h1>Join Us & Get In Touch</h1>
+      <div class="gold-divider"></div>
+      <p>Whether you're ready to join, have questions, or want to collaborate — we'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT & FORM -->
+  <section class="section contact-section">
+    <div class="section-inner">
+      <div class="contact-grid">
+
+        <!-- Contact Info -->
+        <div class="contact-info-panel reveal">
+          <h3>Contact Information</h3>
+          <p>Reach out directly or find us on campus at our weekly sessions — Fridays at 5 PM and Saturdays at 2 PM.</p>
+
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value"><a href="mailto:udsdebatesociety@uds.edu.gh">udsdebatesociety@uds.edu.gh</a></div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-item-label">Location</div>
+              <div class="contact-item-value">University for Development Studies<br>Tamale Main Campus, Northern Region</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📅</div>
+            <div>
+              <div class="contact-item-label">Meeting Times</div>
+              <div class="contact-item-value">Fridays — 5:00 PM<br>Saturdays — 2:00 PM</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Phone / WhatsApp</div>
+              <div class="contact-item-value">[Phone number to be added]</div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <h4>Follow Us</h4>
+            <div class="social-row">
+              <a href="#" class="social-btn" title="Facebook">📘</a>
+              <a href="#" class="social-btn" title="Twitter / X">🐦</a>
+              <a href="#" class="social-btn" title="Instagram">📸</a>
+              <a href="#" class="social-btn" title="WhatsApp">💬</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Membership Form -->
+        <div class="form-wrap reveal">
+          <h2 class="form-section-title">Join the Society</h2>
+          <p class="form-section-sub">Fill out the form below to express your interest. A member of our executive council will follow up with you within 48 hours. You can also simply show up at any of our weekly sessions.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" placeholder="Kwame" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" placeholder="Mensah" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" placeholder="you@uds.edu.gh" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone / WhatsApp</label>
+              <input type="tel" id="phone" placeholder="+233 XX XXX XXXX" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="faculty">Faculty *</label>
+              <select id="faculty" required>
+                <option value="">Select your faculty</option>
+                <option>Faculty of Agriculture, Food and Consumer Sciences</option>
+                <option>Faculty of Biosciences</option>
+                <option>Faculty of Earth and Environmental Sciences</option>
+                <option>Faculty of Education</option>
+                <option>Faculty of Engineering and Technology</option>
+                <option>Faculty of Integrated Development Studies</option>
+                <option>Faculty of Law</option>
+                <option>Faculty of Mathematical Sciences</option>
+                <option>Faculty of Medicine & Health Sciences</option>
+                <option>Faculty of Planning & Land Management</option>
+                <option>School of Business and Law</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="year">Year of Study *</label>
+              <select id="year" required>
+                <option value="">Select year</option>
+                <option>Year 1</option>
+                <option>Year 2</option>
+                <option>Year 3</option>
+                <option>Year 4</option>
+                <option>Postgraduate</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Experience Level</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="exp" value="none" checked /> No prior experience</label>
+              <label class="radio-label"><input type="radio" name="exp" value="some" /> Some experience</label>
+              <label class="radio-label"><input type="radio" name="exp" value="experienced" /> Experienced debater</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="motivation">Why do you want to join? (optional)</label>
+            <textarea id="motivation" placeholder="Tell us a bit about why you're interested and what you hope to gain from the society..."></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button class="btn btn-gold" id="submit-btn" type="button" onclick="submitForm()">Submit Application</button>
+          </div>
+          <p class="form-note">* Required fields. We'll contact you within 48 hours. You're always welcome to simply come to a session — no registration needed.</p>
+
+          <div class="form-success" id="form-success">
+            <h4>🎉 Application Received!</h4>
+            <p>Thank you for your interest. We'll be in touch within 48 hours. In the meantime, feel free to attend any of our weekly sessions — Fridays at 5 PM or Saturdays at 2 PM.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY JOIN -->
+  <section class="section why-section">
+    <div class="section-inner">
+      <div class="section-header reveal" style="text-align:center;">
+        <p class="eyebrow">Why Join Us</p>
+        <h2 style="color:var(--green-deep);">What You'll Gain</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon">🎤</div>
+          <h4>Public Speaking Confidence</h4>
+          <p>Weekly practice sessions in a supportive environment will transform your ability to speak clearly, confidently, and persuasively in any setting.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🧠</div>
+          <h4>Critical Thinking Skills</h4>
+          <p>Learn to dissect complex issues, evaluate evidence, and construct airtight arguments — skills that translate directly to academic and professional success.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🌍</div>
+          <h4>Civic Awareness</h4>
+          <p>Engage with real issues affecting Ghana and the world. Our civic education programmes deepen your understanding of democracy, governance, and your rights.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🤝</div>
+          <h4>Community & Network</h4>
+          <p>Join a community of like-minded students and build friendships and professional connections that last well beyond university.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🏆</div>
+          <h4>Competition Opportunities</h4>
+          <p>Represent UDS at inter-university, regional, and national debate competitions, with coaching and preparation from senior members.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">📜</div>
+          <h4>Certificates & Recognition</h4>
+          <p>Active members receive certificates of participation, awards, and letters of recommendation that strengthen your CV and graduate school applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../club-logo.jpeg" alt="UDS Debate Society" />
+        <p>The UDS Debate and Civic Education Society — building articulate, informed, and civically engaged leaders at the University for Development Studies, Tamale.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <ul>
+          <li><a href="mailto:udsdebatesociety@uds.edu.gh">udsdebatesociety@uds.edu.gh</a></li>
+          <li><a href="#">UDS Main Campus, Tamale</a></li>
+          <li><a href="#">Fridays 5:00 PM</a></li>
+          <li><a href="#">Saturdays 2:00 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 UDS Debate & Civic Education Society. All rights reserved.</span>
+      <span class="motto">"Debate for Development"</span>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function submitForm() {
+      const fname = document.getElementById('fname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const faculty = document.getElementById('faculty').value;
+      const year = document.getElementById('year').value;
+
+      if (!fname || !email || !faculty || !year) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      document.getElementById('submit-btn').disabled = true;
+      document.getElementById('submit-btn').textContent = 'Submitted!';
+      document.getElementById('form-success').classList.add('show');
+    }
+  </script>
+</body>
+</html>

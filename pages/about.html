@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — UDS Debate & Civic Education Society</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.revealed { opacity: 1; transform: none; }
+
+    /* Mission / Vision */
+    .mv-section { background: var(--white); }
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .mv-card {
+      padding: 2.5rem;
+      border-radius: 10px;
+      border-top: 4px solid var(--gold);
+      background: var(--cream);
+    }
+    .mv-card.green {
+      background: var(--green-deep);
+      border-top-color: var(--gold);
+    }
+    .mv-card h3 {
+      font-size: 1.4rem;
+      color: var(--green-deep);
+      margin-bottom: 0.85rem;
+    }
+    .mv-card.green h3 { color: var(--gold-light); }
+    .mv-card p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.8; }
+    .mv-card.green p { color: rgba(255,255,255,0.75); }
+
+    /* History */
+    .history-section { background: var(--cream); }
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .history-sidebar {
+      background: var(--green-deep);
+      border-radius: 10px;
+      padding: 2.5rem;
+      color: var(--white);
+      position: sticky;
+      top: 90px;
+    }
+    .history-sidebar h3 {
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+    }
+    .milestone {
+      display: flex;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .milestone:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .milestone-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      min-width: 50px;
+    }
+    .milestone-text { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+    .history-main h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      color: var(--green-deep);
+      margin-bottom: 1.5rem;
+    }
+    .history-main p {
+      font-size: 0.97rem;
+      color: var(--ink-soft);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .history-placeholder {
+      background: var(--white);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      font-style: italic;
+    }
+
+    /* Values */
+    .values-section { background: var(--green-deep); padding: 5rem 2rem; }
+    .values-inner { max-width: 1200px; margin: 0 auto; }
+    .values-header { text-align: center; margin-bottom: 3rem; }
+    .values-header h2 { color: var(--white); font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 0.75rem; }
+    .values-header p { color: rgba(255,255,255,0.6); }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .value-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+      border-top: 3px solid var(--gold);
+    }
+    .value-icon { font-size: 2rem; margin-bottom: 0.85rem; }
+    .value-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      margin-bottom: 0.6rem;
+    }
+    .value-card p { font-size: 0.84rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+    /* Achievements */
+    .achievements-section { background: var(--white); }
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .achievement-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--green-deep);
+      line-height: 1;
+    }
+    .achievement-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 0.4rem;
+    }
+    .achievement-divider {
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0.6rem auto;
+    }
+
+    @media (max-width: 900px) {
+      .mv-grid, .values-grid { grid-template-columns: 1fr; }
+      .history-grid { grid-template-columns: 1fr; }
+      .history-sidebar { position: static; }
+      .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../club-logo.jpeg" alt="UDS Debate Society Logo" />
+        <div class="nav-brand-text">
+          <span class="name">UDS Debate Society</span>
+          <span class="tagline">Debate for Development</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li class="nav-cta"><a href="contact.html">Join Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="eyebrow">Our Story</p>
+      <h1>About the UDS Debate & Civic Education Society</h1>
+      <div class="gold-divider"></div>
+      <p>A community of passionate students committed to civic leadership, democratic values, and the power of persuasive discourse.</p>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="section mv-section">
+    <div class="section-inner">
+      <div class="section-header reveal" style="text-align:center; margin-bottom: 3rem;">
+        <p class="eyebrow">Purpose & Direction</p>
+        <h2 style="color: var(--green-deep); font-size: clamp(1.8rem,4vw,2.6rem);">What We Stand For</h2>
+      </div>
+      <div class="mv-grid">
+        <div class="mv-card reveal">
+          <p class="eyebrow">Our Mission</p>
+          <h3>To Educate, Empower & Engage</h3>
+          <p>We exist to develop critical thinkers and civic champions at UDS. Through structured debate, public speaking training, and community education, we equip students with the skills to engage meaningfully in Ghana's democratic life.</p>
+        </div>
+        <div class="mv-card green reveal">
+          <p class="eyebrow" style="color: var(--gold-light);">Our Vision</p>
+          <h3>A Ghana Led by Informed Citizens</h3>
+          <p>We envision a Ghana where every citizen is informed, articulate, and actively participates in public life. The UDS Debate Society strives to produce graduates who carry these values from campus into their careers and communities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="section history-section">
+    <div class="section-inner">
+      <div class="history-grid">
+        <div class="history-sidebar reveal">
+          <h3>Key Milestones</h3>
+          <div class="milestone">
+            <div class="milestone-year">Est.</div>
+            <div class="milestone-text">Society founded by a group of passionate UDS students committed to civic education on campus.</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-year">2015</div>
+            <div class="milestone-text">First inter-university debate competition representation, marking our national debut.</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-year">2018</div>
+            <div class="milestone-text">Launched the annual Inter-Faculty Debate Championship, now a flagship UDS event.</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-year">2021</div>
+            <div class="milestone-text">Expanded civic outreach to secondary schools across the Northern Region.</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-year">2024</div>
+            <div class="milestone-text">Surpassed 200 active members, the largest cohort in the society's history.</div>
+          </div>
+        </div>
+        <div class="history-main reveal">
+          <p class="eyebrow">Our History</p>
+          <h2>Built on a Belief That Words Can Change the World</h2>
+          <p>The UDS Debate and Civic Education Society was born from a simple but powerful conviction: that students who can think clearly, speak persuasively, and engage respectfully in public discourse are the foundation of a thriving democracy.</p>
+          <p>Over the years, we have grown from a small group of enthusiasts into one of the most active student societies at UDS, producing alumni who go on to careers in law, public service, journalism, and civil society.</p>
+          <div class="history-placeholder">
+            📝 <strong>More to come:</strong> The full history of our society will be added here soon. We're collecting stories, photos, and testimonies from founding members and alumni. Watch this space.
+          </div>
+          <p style="margin-top:1.25rem;">What has never changed is our motto: <strong>Debate for Development</strong> — the belief that informed debate is not just an academic exercise, but a tool for national progress.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values-section">
+    <div class="values-inner">
+      <div class="values-header reveal">
+        <p class="eyebrow" style="color:var(--gold-light);">Our Core Values</p>
+        <h2>What Guides Everything We Do</h2>
+        <p>Six principles that define every debate, every outreach, every member.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-icon">🎯</div>
+          <h4>Integrity</h4>
+          <p>We debate with honesty and argue in good faith. Our positions are grounded in evidence, not empty rhetoric.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🏛️</div>
+          <h4>Civic Responsibility</h4>
+          <p>We believe every citizen has a duty to understand and participate in the governance of their community.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">💡</div>
+          <h4>Critical Thinking</h4>
+          <p>We question assumptions, evaluate evidence, and seek truth through structured intellectual engagement.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🤝</div>
+          <h4>Respect</h4>
+          <p>We engage opponents with courtesy and dignity. The strength of an argument — not the volume of a voice — wins debates.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🌍</div>
+          <h4>Service</h4>
+          <p>We take our knowledge beyond campus. Community outreach is as central to our identity as competitive debate.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">📈</div>
+          <h4>Excellence</h4>
+          <p>We hold ourselves to high standards — in preparation, in delivery, and in the quality of our civic contributions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="section achievements-section">
+    <div class="section-inner">
+      <div class="section-header reveal" style="text-align:center;">
+        <p class="eyebrow">By the Numbers</p>
+        <h2 style="color:var(--green-deep);">Our Impact in Figures</h2>
+      </div>
+      <div class="achievements-grid">
+        <div class="reveal">
+          <div class="achievement-num">200+</div>
+          <div class="achievement-divider"></div>
+          <div class="achievement-label">Active Members</div>
+        </div>
+        <div class="reveal">
+          <div class="achievement-num">50+</div>
+          <div class="achievement-divider"></div>
+          <div class="achievement-label">Competitions Entered</div>
+        </div>
+        <div class="reveal">
+          <div class="achievement-num">10+</div>
+          <div class="achievement-divider"></div>
+          <div class="achievement-label">Years of Service</div>
+        </div>
+        <div class="reveal">
+          <div class="achievement-num">1000+</div>
+          <div class="achievement-divider"></div>
+          <div class="achievement-label">Community Members Reached</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../club-logo.jpeg" alt="UDS Debate Society" />
+        <p>The UDS Debate and Civic Education Society — building articulate, informed, and civically engaged leaders at the University for Development Studies, Tamale.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <ul>
+          <li><a href="mailto:udsdebatesociety@uds.edu.gh">udsdebatesociety@uds.edu.gh</a></li>
+          <li><a href="#">UDS Main Campus, Tamale</a></li>
+          <li><a href="#">Fridays 5:00 PM</a></li>
+          <li><a href="#">Saturdays 2:00 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 UDS Debate & Civic Education Society. All rights reserved.</span>
+      <span class="motto">"Debate for Development"</span>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
